@@ -1,0 +1,7 @@
+---
+  name: Ansible Linux Lockdown Playbook
+  hosts: testing
+  vars:
+  Tasks:
+    name:
+      include_role:
