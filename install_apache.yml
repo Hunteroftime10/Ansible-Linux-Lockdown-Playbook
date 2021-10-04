@@ -1,0 +1,25 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+
+
+  - name: install apache2 and php package and update cache
+#the first name has nothing to do with the package, it's just a title
+    tags: Always
+    #--tags (here) to only call those tags
+    apt:
+      name:
+        - apache2
+        - libapache2-mod-php
+      state: latest
+      #latest, to update/ install, absent is to uninstall
+      update_cache: yes
+
+  - name: install updates
+
+    apt:
+      upgrade: dist
+      update_cache: yes

