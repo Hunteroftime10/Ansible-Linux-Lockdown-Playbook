@@ -2,7 +2,7 @@
   - hosts: all
     become: true
     tasks:
-    - name: Remove file (delete file)
-      ansible.builtin.file:
-        path: /*
-        state: absent
+  - name: Find /var/log files equal or greater than 10 megabytes ending with .old or .log.gz
+    find:
+    paths: /home/kali/Downloads
+    patterns: '*.jpeg'
