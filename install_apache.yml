@@ -8,7 +8,7 @@
 
   - name: install apache2 and php package and update cache
 #the first name has nothing to do with the package, it's just a title
-    tags: Always
+  
     #--tags (here) to only call those tags
     apt:
       name:

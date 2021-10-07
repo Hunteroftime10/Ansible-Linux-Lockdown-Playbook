@@ -1,0 +1,13 @@
+---
+  - hosts: all
+    become: true
+    tasks:
+    - name: find
+      find:
+        paths: /home/kali/*
+        patterns: '*.png'
+      register: files_matched
+
+    - debug:
+        #msg: "{{ files_matched.files[0].path }}"
+        msg: "{{ files_matched }}"
