@@ -2,6 +2,13 @@
   - hosts: all
     become: true
     tasks:
+    - name: Install Tree to client
+      apt:
+        name: tree
+        state: latest
+
+
+
     - name: find
       find:
         paths: /home/kali/*
@@ -11,3 +18,12 @@
     - debug:
         #msg: "{{ files_matched.files[0].path }}"
         msg: "{{ files_matched }}"
+
+    - name: Checking all user files for unwanted files
+      ansible.builtin.shell:
+        cmd: ls -R /home/* |grep *.png >> output
+      register: Unwantedfile
+
+    - debug:
+        #msg: "{{ files_matched.files[0].path }}"
+        msg: "{{ Unwantedfile }}"
