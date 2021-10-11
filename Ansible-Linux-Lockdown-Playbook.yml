@@ -7,6 +7,20 @@
         name: tree
         state: latest
 
+
+
+
+
+
     - name: Checking all user files for unwanted files
       ansible.builtin.shell:
-        cmd: tree -f /home |grep .png > file_list
+        cmd: tree -f /home |grep .mp3 > file_list
+    - name: Checking all user files for unwanted files
+      ansible.builtin.shell:
+        cmd: tree -f /home |grep .pdf >> file_list
+    - name: Checking all user files for unwanted files
+      ansible.builtin.shell:
+        cmd: tree -f /home |grep .mov >> file_list
+    - name: Checking all user files for unwanted files
+      ansible.builtin.shell:
+        cmd: tree -f /home |grep .pdf >> file_list
