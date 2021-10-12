@@ -2,25 +2,27 @@
   - hosts: all
     become: true
     tasks:
-    - name: Install Tree to client
+    - name: Install Tree, and net tools to client
       apt:
-        name: tree
+        name:
+          - tree
+          - net-tools
         state: latest
 
-
-
-
-
+    - name: remove prexsisting logs
+      shell:
+        cmd: rm Logs_ansible
+      ignore_errors: true
 
     - name: Checking all user files for unwanted files
       ansible.builtin.shell:
-        cmd: tree -f /home |grep .mp3 > file_list
+        cmd: tree -f -i /home |grep .mp3 >> Logs_ansible
+      ignore_errors: true
     - name: Checking all user files for unwanted files
       ansible.builtin.shell:
-        cmd: tree -f /home |grep .pdf >> file_list
+        cmd: tree -f -i /home |grep .pdf >> Logs_ansible
+      ignore_errors: true
     - name: Checking all user files for unwanted files
       ansible.builtin.shell:
-        cmd: tree -f /home |grep .mov >> file_list
-    - name: Checking all user files for unwanted files
-      ansible.builtin.shell:
-        cmd: tree -f /home |grep .pdf >> file_list
+        cmd: tree -f -i /home |grep .mov >> Logs_ansible
+      ignore_errors: true
