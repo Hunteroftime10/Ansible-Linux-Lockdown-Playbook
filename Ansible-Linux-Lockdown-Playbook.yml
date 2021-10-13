@@ -2,27 +2,34 @@
   - hosts: all
     become: true
     tasks:
-    - name: Install Tree, and net tools to client
-      apt:
-        name:
-          - tree
-          - net-tools
-        state: latest
 
-    - name: remove prexsisting logs
-      shell:
-        cmd: rm Logs_ansible
-      ignore_errors: true
+    - name: Install Packages
+      include_role:
+        name: install-packages
 
-    - name: Checking all user files for unwanted files
-      ansible.builtin.shell:
-        cmd: tree -f -i /home |grep .mp3 >> Logs_ansible
-      ignore_errors: true
-    - name: Checking all user files for unwanted files
-      ansible.builtin.shell:
-        cmd: tree -f -i /home |grep .pdf >> Logs_ansible
-      ignore_errors: true
-    - name: Checking all user files for unwanted files
-      ansible.builtin.shell:
-        cmd: tree -f -i /home |grep .mov >> Logs_ansible
-      ignore_errors: true
+
+    - name: Find Media Files
+      include_role:
+        name: find-media-files
+
+    - name: Check Services
+      include_role:
+        name: check-services
+
+    # - name: remove prexsisting logs
+    #   shell:
+    #     cmd: rm Logs_ansible
+    #   ignore_errors: true
+    #
+    # - name: Checking all user files for unwanted files
+    #   ansible.builtin.shell:
+    #     cmd: tree -f -i /home |grep .mp3 >> Logs_ansible
+    #   ignore_errors: true
+    # - name: Checking all user files for unwanted files
+    #   ansible.builtin.shell:
+    #     cmd: tree -f -i /home |grep .pdf >> Logs_ansible
+    #   ignore_errors: true
+    # - name: Checking all user files for unwanted files
+    #   ansible.builtin.shell:
+    #     cmd: tree -f -i /home |grep .mov >> Logs_ansible
+    #   ignore_errors: true

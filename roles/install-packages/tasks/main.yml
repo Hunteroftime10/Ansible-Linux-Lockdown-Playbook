@@ -1,0 +1,30 @@
+---
+# tasks file for install-packages
+
+
+    - name: Install Tools
+      apt:
+        name:
+          - tree
+          - net-tools
+          - unattended-upgrades
+          - ufw
+        state: latest
+
+    - name: Make sure unattended upgrades is enabled
+      systemd:
+         enabled: yes
+         name: unattended-upgrades
+
+    - name: Make sure unattended upgrades is enabled
+      systemd:
+          state: started
+          name: unattended-upgrades
+
+        #apphend config fiele to /etc/apt/apt.config
+        #https://phoenixnap.com/kb/automatic-security-updates-ubuntu
+
+    - name: Upgrade all packages to the latest version
+      apt:
+        name: "*"
+        state: latest

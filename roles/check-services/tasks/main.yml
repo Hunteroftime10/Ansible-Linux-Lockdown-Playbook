@@ -1,0 +1,30 @@
+---
+# tasks file for check-services
+- name: Make sure firewall is running
+  systemd:
+    state: started
+    name: ufw
+
+- name: Make sure tftp is disabled
+  systemd:
+    state: stopped
+    name: tftp
+  ignore_errors: true
+
+- name: Make sure ftp is disabled
+  systemd:
+    state: stopped
+    name: pure-ftpd
+  ignore_errors: true
+
+- name: Make sure tftp is disabled
+  systemd:
+    state: disabled
+    name: tftp
+  ignore_errors: true
+
+- name: Make sure ftp is disabled
+  systemd:
+    state: disabled
+    name: pure-ftpd
+  ignore_errors: true
