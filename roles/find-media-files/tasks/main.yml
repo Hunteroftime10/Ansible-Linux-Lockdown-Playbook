@@ -1,21 +1,28 @@
-# ---
-# # tasks file for find-media-files
-# #register all users home directorys
-# #this will have to loop
-# #
+---
+# tasks file for find-media-files
+#register all users home directorys
+#this will have to loop
 #
-#
-#     - name: Ansible delete file glob
-#       find:
-#         paths: /etc/Ansible
-#         patterns: "^*.txt"
-#       register: files_to_delete
-#
-#     - name: Ansible remove file glob
-#       file:
-#         path: "{{ item.path }}"
-#         state: absent
-#       with_items: "{{ files_to_delete }}"
+
+
+    - name: Ansible delete file glob
+      find:
+        paths: /etc/Ansible
+        patterns: "^*.txt"
+      register: files_to_delete
+
+    - debug:
+        var: files_to_delete
+
+
+
+
+    # - name: Ansible remove file glob
+    #   file:
+    #     path: "{{ item.path }}"
+    #     state: absent
+    #   with_items: "{{ files_to_delete }}"
+
      - name: Finding all users puting data in users in the user directory
        ansible.builtin.shell:
 
