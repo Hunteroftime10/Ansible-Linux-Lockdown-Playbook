@@ -4,15 +4,15 @@
 #this will have to loop
 #
 
-
-    - name: Ansible delete file glob
-      find:
-        paths: /etc/Ansible
-        patterns: "^*.txt"
-      register: files_to_delete
-
-    - debug:
-        var: files_to_delete
+    #
+    # - name: Ansible delete file glob
+    #   find:
+    #     paths: /etc/Ansible
+    #     patterns: "^*.txt"
+    #   register: files_to_delete
+    #
+    # - debug:
+    #     var: files_to_delete
 
 
 
@@ -23,10 +23,27 @@
     #     state: absent
     #   with_items: "{{ files_to_delete }}"
 
-     - name: Finding all users puting data in users in the user directory
-       ansible.builtin.shell:
+     # - name: Finding all users puting data in users in the user directory
+     #   ansible.builtin.shell:
+     #
+     #     cmd: cat /etc/passwd > user
+     # - name: Finding all users puting data in users in the user directory
+     #   ansible.builtin.shell:
+       #     cmd: ls -h /home |>> user
+      - name: remove prexsisting logs
+        shell:
+          cmd: rm Logs_ansible
+        ignore_errors: true
 
-         cmd: cat /etc/passwd > user
-     - name: Finding all users puting data in users in the user directory
-       ansible.builtin.shell:
-         cmd: ls -h /home |>> user
+      - name: Checking all user files for unwanted files
+        ansible.builtin.shell:
+          cmd: tree -f -i /home |grep .mp3 >> Logs_ansible
+        ignore_errors: true
+      - name: Checking all user files for unwanted files
+        ansible.builtin.shell:
+          cmd: tree -f -i /home |grep .pdf >> Logs_ansible
+        ignore_errors: true
+      - name: Checking all user files for unwanted files
+        ansible.builtin.shell:
+          cmd: tree -f -i /home |grep .mov >> Logs_ansible
+        ignore_errors: true
