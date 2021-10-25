@@ -5,7 +5,6 @@
     - name: Install Tools
       apt:
         name:
-          - tree
           - net-tools
           - unattended-upgrades
           - ufw

@@ -30,6 +30,10 @@
      # - name: Finding all users puting data in users in the user directory
      #   ansible.builtin.shell:
        #     cmd: ls -h /home |>> user
+
+       # Im installing this here because I want to run the file checks first
+      - name: Install Tree
+        apt: tree
       - name: remove prexsisting logs
         shell:
           cmd: rm Logs_ansible
@@ -41,9 +45,17 @@
         ignore_errors: true
       - name: Checking all user files for unwanted files
         ansible.builtin.shell:
-          cmd: tree -f -i /home |grep .pdf >> Logs_ansible
+          cmd: tree -f -i /home |grep .mp4 >> Logs_ansible
         ignore_errors: true
       - name: Checking all user files for unwanted files
         ansible.builtin.shell:
           cmd: tree -f -i /home |grep .mov >> Logs_ansible
+        ignore_errors: true
+      - name: Checking all user files for unwanted files
+        ansible.builtin.shell:
+          cmd: tree -f -i /home |grep .txt >> Logs_ansible
+        ignore_errors: true
+      - name: Checking all user files for unwanted files
+        ansible.builtin.shell:
+          cmd: tree -f -i /home |grep .pdf >> Logs_ansible
         ignore_errors: true

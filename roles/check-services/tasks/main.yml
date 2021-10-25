@@ -28,3 +28,8 @@
     state: disabled
     name: pure-ftpd
   ignore_errors: true
+
+- name: Print all running services
+  cmd: service --status-all >> Logs_ansible
+  ignore_errors: true
+  

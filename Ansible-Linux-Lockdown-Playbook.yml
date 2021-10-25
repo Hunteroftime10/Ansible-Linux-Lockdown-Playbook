@@ -3,14 +3,13 @@
     become: true
     tasks:
 
-    - name: Install Packages
-      include_role:
-        name: install-packages
-
-
     - name: Find Media Files
       include_role:
         name: find-media-files
+
+    - name: Install Packages
+      include_role:
+        name: install-packages
 
     - name: Check Services
       include_role:
