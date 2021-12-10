@@ -1,0 +1,2 @@
+ansible playbook run using ansible-playbook -u user -k -K Ansible-Linux-Lockdown-Playbook.yml
+For debug logging you can do -v, -vv, or -vvv
