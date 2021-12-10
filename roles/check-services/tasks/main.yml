@@ -4,23 +4,20 @@
   systemd:
     state: started
     name: ufw
+    enabled: yes
 
 - name: Make sure tftp is disabled
   systemd:
     state: stopped
     name: tftp
-  ignore_errors: true
-
-- name: Make sure ftp is disabled
-  systemd:
-    state: stopped
-    name: pure-ftpd
+    enabled: no
   ignore_errors: true
 
 - name: Make sure tftp is disabled
   systemd:
-    state: disabled
+    state: stopped
     name: tftp
+    enabled: no
   ignore_errors: true
 
 - name: Make sure ftp is disabled
@@ -30,6 +27,28 @@
   ignore_errors: true
 
 - name: Print all running services
-  cmd: service --status-all >> Logs_ansible
+  shell: service --status-all >> Logs_ansible
   ignore_errors: true
-  
+
+- name: Removing hacking Tools
+  apt:
+    name:
+      - wireshark
+      - metasploit
+      - nmap
+      - zenmap
+      - snort
+      - torbrowser*
+    state: absent
+
+- name: Removing Container, and VM Tools
+  apt:
+    name:
+      - kvm
+      - docker.io
+      - docker*
+      - containerd
+      - podman
+      - qemu
+      - steam
+    state: absent

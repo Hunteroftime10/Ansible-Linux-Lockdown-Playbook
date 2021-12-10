@@ -1,20 +1,23 @@
 ---
-  - hosts: all
-    become: true
-    tasks:
+- hosts: localhost
+  become: true
+  tasks:
 
-    - name: Find Media Files
-      include_role:
-        name: find-media-files
+  - name: Find Media Files
+    include_role:
+      name: find-media-files
 
-    - name: Install Packages
-      include_role:
-        name: install-packages
+  - name: Install Packages
+    include_role:
+      name: install-packages
 
-    - name: Check Services
-      include_role:
-        name: check-services
+  - name: Check Services
+    include_role:
+      name: check-services
 
+  - name: Virus scan
+    include_role:
+      name: av-scan
     # - name: remove prexsisting logs
     #   shell:
     #     cmd: rm Logs_ansible

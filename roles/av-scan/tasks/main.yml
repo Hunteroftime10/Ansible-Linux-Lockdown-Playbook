@@ -1,0 +1,30 @@
+---
+# tasks file for av-scan
+# - name: create clamav database folder
+#   file:
+#     path: /var/lib/clamav
+#     state: directory
+#
+# - name: download daily sig database
+#   get_url:
+#     url: https://database.clamav.net/daily.cvd
+#     dest: /var/lib/clamav/
+
+- name: start freshclam
+  systemd:
+    state: started
+    name: clamav-freshclam
+    enabled: yes
+
+- name: start scan
+  command: freshclam
+  become: yes
+  ignore_errors: yes
+
+- name: wait for freshclam to update
+  wait_for:
+    timeout: 1000
+
+- name: start scan
+  command: clamscan --infected --recursive --remove /
+  become: yes
